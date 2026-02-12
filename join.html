@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Us - EcoRewards</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="EcoRewards Logo">
+            <span>EcoRewards</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="our-vision.html">Our Vision</a>
+            <a href="disposal-hub.html">Disposal Hub Location</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="join.html" class="active">Join Us</a>
+        </div>
+        <div class="auth-buttons">
+            <button onclick="showLoginModal()" class="login-btn">Login</button>
+            <button onclick="showSignupModal()" class="signup-btn">Sign Up</button>
+        </div>
+    </nav>
+
+    <!-- Join Us Content -->
+    <div class="join-container">
+        <div class="welcome-message">
+            <h1 class="fade-in">Join Our Green Revolution</h1>
+            <p class="slide-in">Be part of a team that's making a difference. At EcoRewards, we're not just creating an app – we're building a sustainable future, one task at a time.</p>
+        </div>
+
+        <div class="join-form-container slide-up">
+            <h2>Interested in Joining Our Team?</h2>
+            <form id="joinTeamForm" onsubmit="handleJoinSubmit(event)">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Mobile Number</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Why do you want to join our team? (Optional)</label>
+                    <textarea id="message" rows="4"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function handleJoinSubmit(event) {
+            event.preventDefault();
+            const formData = {
+                name: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                message: document.getElementById('message').value
+            };
+            
+            // Store in localStorage (you can modify this to send to a server instead)
+            const applications = JSON.parse(localStorage.getItem('teamApplications') || '[]');
+            applications.push(formData);
+            localStorage.setItem('teamApplications', JSON.stringify(applications));
+            
+            // Show success message
+            alert('Thank you for your interest! We will contact you soon.');
+            event.target.reset();
+        }
+    </script>
+</body>
+</html> 

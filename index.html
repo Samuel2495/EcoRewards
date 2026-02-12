@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoRewards - Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Add Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="images/21.png" alt="EcoRewards Logo" class="logo-img">
+            <span>EcoRewards</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="our-vision.html">Our Vision</a>
+            <a href="disposal-hub.html">Disposal Hub Location</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="join.html">Join Us</a>
+        </div>
+        <div class="auth-buttons">
+            <button onclick="showLoginModal()" class="login-btn">Login</button>
+            <button onclick="showSignupModal()" class="signup-btn">Sign Up</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1>Welcome to EcoRewards</h1>
+        <p>Turn your daily tasks into rewards while helping the environment</p>
+        <div class="get-started-container">
+            <button class="get-started-btn" onclick="showSignupModal()">Get Started</button>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2 style="color:white">Login</h2>
+            
+            <!-- Login Type Toggle -->
+            <div class="login-toggle">
+                <label class="switch">
+                    <input type="checkbox" id="loginTypeToggle" onchange="toggleLoginType()">
+                    <span class="slider round"></span>
+                </label>
+                <span id="loginTypeText">User Login</span>
+            </div>
+
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginUsername">Username</label>
+                    <input type="text" id="loginUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <div class="modal-footer">
+                <p>Don't have an account? <a href="#" onclick="switchToSignup()">Sign Up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSignupModal()">&times;</span>
+            <h2 style="color:white">Sign Up</h2>
+            <form id="signupForm" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupUsername">Username</label>
+                    <input type="text" id="signupUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPhone">Mobile Number</label>
+                    <input type="tel" id="signupPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Create Password</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" required>
+                </div>
+                <button type="submit">Sign Up</button>
+            </form>
+            <div class="modal-footer">
+                <p>Already have an account? <a href="#" onclick="switchToLogin()">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add this after the hero section -->
+   
+
+    <!-- Add this after the daily tasks section -->
+   
+
+  
+    <!-- Features Section -->
+    <section class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-tasks"></i>
+                <h3>Daily Tasks</h3>
+                <p>Complete daily eco-friendly tasks and earn points. Track your progress and maintain your green streak.</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-recycle"></i>
+                <h3>Bulk Recycling</h3>
+                <p>Dispose of recyclable materials at our hubs and earn additional credits for your contribution.</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-globe-asia"></i>
+                <h3>Social Impact</h3>
+                <p>Join a community of eco-warriors and see your collective impact on the environment grow.</p>
+            </div>
+        </div>
+    </section>
+
+  
+
+    <!-- Footer -->
+    
+
+    <!-- Add this modal for admin task management -->
+    <div id="taskManagementModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Task Management</h2>
+            <div class="task-management-container">
+                <div class="existing-tasks">
+                    <h3>Existing Tasks</h3>
+                    <div class="tasks-table-container">
+                        <table id="tasksTable">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Points</th>
+                                    <th>Credits</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Tasks will be listed here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="add-task-form">
+                    <h3>Add New Task</h3>
+                    <form id="addTaskForm">
+                        <div class="form-group">
+                            <label for="taskTitle">Title</label>
+                            <input type="text" id="taskTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="taskDescription">Description</label>
+                            <textarea id="taskDescription" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="taskPoints">Points</label>
+                            <input type="number" id="taskPoints" required min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="taskCredits">Credits</label>
+                            <input type="number" id="taskCredits" required min="0">
+                        </div>
+                        <button type="submit" class="submit-btn">Add Task</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add this modal for admin rewards management -->
+    <div id="rewardsManagementModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Rewards Management</h2>
+            <div class="rewards-management-container">
+                <div class="existing-rewards">
+                    <h3>Existing Rewards</h3>
+                    <div class="rewards-table-container">
+                        <table id="rewardsTable">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Points Cost</th>
+                                    <th>Credits Cost</th>
+                                    <th>Quantity</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Rewards will be listed here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="add-reward-form">
+                    <h3>Add New Reward</h3>
+                    <form id="addRewardForm">
+                        <div class="form-group">
+                            <label for="rewardTitle">Title</label>
+                            <input type="text" id="rewardTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="rewardDescription">Description</label>
+                            <textarea id="rewardDescription" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="pointsCost">Points Cost</label>
+                            <input type="number" id="pointsCost" required min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="creditsCost">Credits Cost</label>
+                            <input type="number" id="creditsCost" required min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="quantity">Quantity Available</label>
+                            <input type="number" id="quantity" required min="0">
+                        </div>
+                        <button type="submit" class="submit-btn">Add Reward</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add this to your afterLoginContent section -->
+    
+
+    <!-- Scripts -->
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
