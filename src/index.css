@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-d-black text-gray-200;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Glassmorphism Utilities */
+.glass {
+  @apply bg-d-sec-black bg-opacity-60 backdrop-blur-md border border-white border-opacity-10 shadow-xl;
+}
+
+.glass-dark {
+  @apply bg-gray-900 bg-opacity-80 backdrop-blur-lg border border-gray-700 border-opacity-30;
+}
