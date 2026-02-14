@@ -4,7 +4,7 @@ import { useData } from '../context/DataContext';
 import Button from '../components/ui/Button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Leaf, Coins, CheckCircle, Clock, XCircle, CalendarCheck, X } from 'lucide-react';
-import { QrReader } from 'react-qr-reader';
+import QrReader from 'react-qr-scanner';
 
 const UserDashboard = () => {
     const { user, updateUser } = useAuth();
@@ -17,22 +17,22 @@ const UserDashboard = () => {
     // Calculate stats
     const approvedTasks = userTasks.filter(t => t.status === 'approved');
 
-    const handleScan = (result, error) => {
-        if (result) {
-            const code = result?.text || result;
-            if (code) {
-                const response = checkInToHub(code);
-                if (response.success) {
-                    setScanResult(response.message);
-                    setIsCheckedIn(true);
-                    setShowScanner(false);
-                    updateUser({ points: (user.points || 0) + response.points });
-                } else {
-                    setScanError(response.message);
-                }
-            }
+    const handleScan = (result) => {
+    if (result) {
+        const code = result?.text || result;
+
+        const response = checkInToHub(code);
+        if (response.success) {
+            setScanResult(response.message);
+            setIsCheckedIn(true);
+            setShowScanner(false);
+            updateUser({ points: (user.points || 0) + response.points });
+        } else {
+            setScanError(response.message);
         }
-    };
+    }
+};
+
 
     const handleCheckInClick = () => {
         if (!isCheckedIn) {
@@ -70,10 +70,17 @@ const UserDashboard = () => {
 
                             <div className="overflow-hidden rounded-xl border-2 border-dashed border-emerald-500/50 mb-4 bg-black">
                                 <QrReader
-                                    onResult={(result, error) => handleScan(result, error)}
-                                    className="w-full"
-                                    constraints={{ facingMode: 'environment' }}
+                                    delay={300}
+                                    onError={(error) => setScanError(error?.message || "Camera error")}
+                                    onScan={(data) => {
+                                        if (data) {
+                                            handleScan({ text: data });
+                                        }
+                                    }}
+                                    constraints={{ video: { facingMode: "environment" } }}
+                                    style={{ width: "100%" }}
                                 />
+
                             </div>
 
                             {scanError && (
