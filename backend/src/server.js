@@ -1,12 +1,18 @@
-import express from 'express';
-import path from 'path';
-import { fileURLToPath } from 'url';
-const app = express();
+import dotenv from "dotenv";
+import app from "./app.js";
+// From the db.js file
+// import { connectDB, disconnectDB } from "./config/db.js";
+// const app = express();
 
-const PORT = 4500;
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-app.listen(PORT);
-app.get('/', (req,res) => {
-    res.sendFile(path.join(__dirname,'index.html'));
+// configs();
+// connectDB();
+
+// // const app = express();
+
+dotenv.config();
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () =>{
+    console.log(`Server running on port ${PORT}`);
 });
