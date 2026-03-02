@@ -33,9 +33,5 @@ npm run dev
 - `src/pages/`: Main application views (Dashboard, Hubs, Admin).
 - `src/components/`: Reusable UI elements and layout wrappers.
 
-## 📝 Documentation for Developers
-- [Backend Integration Guide](./BACKEND_INTEGRATION.md) - For migrating to a real server.
-- [Project Status](./PROJECT_STATUS.md) - Current progress and technical debt.
-
 ---
 *Built with React, Vite, Tailwind CSS, and Framer Motion.*
