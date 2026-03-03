@@ -1,4 +1,4 @@
-import { data } from "autoprefixer";
+// import { data } from "autoprefixer";
 import prisma from "../config/prisma.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -22,8 +22,8 @@ try{
         data: {
             username,
             password: hashedPassword,
-            role
-        }
+            role,
+        },
     });
 
     res.status(201).json({message: "User created successfully!!"});
@@ -54,7 +54,7 @@ export const login = async (req,res) => {
 
         const token = jwt.sign(
             {id: user.id, role: user.role},
-            Process.env,JWT_SECRET,
+            process.env,JWT_SECRET,
             {expiresIn: "1d"}
         );
 

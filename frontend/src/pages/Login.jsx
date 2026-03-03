@@ -12,13 +12,18 @@ const Login = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const result = login(formData.username, formData.password, isAdmin ? 'admin' : 'user');
+        
+        const result = await login(
+            formData.username,
+            formData.password,
+            isAdmin ? 'admin' : 'user'
+        );
 
-        if (result.success) {
+        if(result.success){
             navigate(isAdmin ? '/admin' : '/dashboard');
-        } else {
+        }   else{
             setError(result.message);
         }
     };

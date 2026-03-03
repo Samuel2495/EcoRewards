@@ -22,39 +22,34 @@ export function AuthProvider({ children }) {
         { username: 'admin_fortkochi', password: 'eco2024', name: 'Fort Kochi Hub Admin', hubCode: 'FTK-HUB' }
     ];
 
-    const login = (username, password, type = 'user') => {
-        if (type === 'admin') {
-            if (username === 'admin_123' && password === 'admin123') {
-                const adminUser = { username, role: 'admin', fullName: 'Super Administrator' };
-                setUser(adminUser);
-                localStorage.setItem('currentUser', JSON.stringify(adminUser));
-                return { success: true };
+    const login = async (username,password,role) => {
+        try{
+            const res = await fetch("http://localhost:5000/api/auth/login",{
+                method: "POST",
+                headers: {
+                    "Content-Type":"application/json",
+                },
+                body: JSON.stringify({
+                    username,password,role
+                }),
+            });
+
+            const data = await res.json();
+
+            if(!res.ok) {
+                return { success: false, message: data.message || "Login Failed"};
             }
 
-            const hubAdmin = HUB_ADMINS.find(admin => admin.username === username && admin.password === password);
-            if (hubAdmin) {
-                const adminUser = {
-                    username: hubAdmin.username,
-                    role: 'admin',
-                    fullName: hubAdmin.name,
-                    hubCode: hubAdmin.hubCode
-                };
-                setUser(adminUser);
-                localStorage.setItem('currentUser', JSON.stringify(adminUser));
-                return { success: true };
-            }
-        } else {
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
-            const foundUser = users.find(u => u.username === username && u.password === password);
-            if (foundUser) {
-                setUser(foundUser);
-                localStorage.setItem('currentUser', JSON.stringify(foundUser));
-                return { success: true };
-            }
+            localStorage.setItem("token", data.token);
+
+            setUser(data.user);
+
+            return { success: true};
+
+        }   catch(err){
+            return {success: false, message: "Server Error"};
         }
-        return { success: false, message: 'Invalid credentials' };
     };
-
     const logout = () => {
         setUser(null);
         localStorage.removeItem('currentUser');
